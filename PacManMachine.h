@@ -20,6 +20,8 @@ class PacManMachine : public QObject
         void readXml();
         void readCsv();
 
+        void sortPacMans();
+
 
         QString imageFile;
         QString title;
@@ -27,6 +29,9 @@ class PacManMachine : public QObject
         double clockPosX , clockPosY;
 
         vector<PacMan * > pacManList;
+
+    private:
+        void swapPacMan(int a , int b);
 };
 
 #endif // PACMANMACHINE_H

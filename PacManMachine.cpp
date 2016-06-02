@@ -140,3 +140,25 @@ void PacManMachine::readCsv()
     }
 
 }
+
+void PacManMachine::sortPacMans()
+{
+    for(int i=0; i<pacManList.size(); i++)
+    {
+        for(int j=1; j<pacManList.size()-i; j++)
+        {
+            if( pacManList.at( j )->startSec < pacManList.at( j-1)->startSec )
+            {
+                swapPacMan(  j , (j-1) );
+            }
+        }
+    }
+}
+
+void PacManMachine::swapPacMan(int a, int b)
+{
+    PacMan * foo;
+    foo = pacManList.at(a);
+    pacManList.at(a) = pacManList.at(b);
+    pacManList.at(a) = foo;
+}

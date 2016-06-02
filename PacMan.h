@@ -12,7 +12,6 @@ class PacMan : public QGraphicsEllipseItem
     public:
         PacMan(int radius , QColor color , double startX , double startY , double endX , double endY , int startSec , int endSec);
 
-    private:
         int radius;
         QColor color;
         double startX;
