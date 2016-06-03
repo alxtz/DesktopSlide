@@ -16,12 +16,12 @@ TEMPLATE = app
 SOURCES += main.cpp\
         MainWindow.cpp \
     PacManMachine.cpp \
-    View.cpp \
     StimulateScene.cpp \
-    PacMan.cpp
+    PacMan.cpp \
+    StView.cpp
 
 HEADERS  += MainWindow.h \
     PacManMachine.h \
-    View.h \
     StimulateScene.h \
-    PacMan.h
+    PacMan.h \
+    StView.h

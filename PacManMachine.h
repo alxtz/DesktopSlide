@@ -19,16 +19,24 @@ class PacManMachine : public QObject
         PacManMachine();
         void readXml();
         void readCsv();
-
         void sortPacMans();
+        void spawnPacMans();
 
-
+        QTimer  * spawnTimer;
         QString imageFile;
         QString title;
         int reloadCycle;
         double clockPosX , clockPosY;
 
         vector<PacMan * > pacManList;
+
+        int pacManCount;
+
+    signals:
+        void setPacMan(PacMan * );
+
+    public slots:
+        void emitSignal();
 
     private:
         void swapPacMan(int a , int b);

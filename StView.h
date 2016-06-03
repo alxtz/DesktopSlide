@@ -1,24 +1,33 @@
-#ifndef VIEW_H
-#define VIEW_H
+#ifndef STVIEW_H
+#define STVIEW_H
 
 
+#include <QTimer>
 #include <QObject>
 #include <QGraphicsView>
 #include "./StimulateScene.h"
 #include "PacManMachine.h"
 
-class View : public QGraphicsView
+class StView : public QGraphicsView
 {
     Q_OBJECT
 
     public:
-        View(QWidget * parent = 0);
+        StView(QWidget * parent = 0);
 
         StimulateScene * stimulateScene;
+
         PacManMachine * pacManMachine;
+
+        QString backgroundPath;
+
+        QTimer * moveTimer;
 
     signals:
         void setSize(int x , int y);
+
+    public slots:
+        void addPacMan(PacMan * pacMan);
 };
 
-#endif // VIEW_H
+#endif // STVIEW_H

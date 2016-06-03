@@ -2,7 +2,7 @@
 #define MAINWINDOW_H
 
 #include <QMainWindow>
-#include "View.h"
+#include "StView.h"
 
 class MainWindow : public QMainWindow
 {
@@ -16,7 +16,7 @@ class MainWindow : public QMainWindow
         void setSize(int x , int y);
 
     private:
-        View * view;
+        StView * view;
 };
 
 #endif // MAINWINDOW_H
