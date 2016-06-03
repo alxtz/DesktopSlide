@@ -18,10 +18,12 @@ SOURCES += main.cpp\
     PacManMachine.cpp \
     StimulateScene.cpp \
     PacMan.cpp \
-    StView.cpp
+    StView.cpp \
+    Clock.cpp
 
 HEADERS  += MainWindow.h \
     PacManMachine.h \
     StimulateScene.h \
     PacMan.h \
-    StView.h
+    StView.h \
+    Clock.h

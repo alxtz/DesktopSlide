@@ -53,22 +53,26 @@ SOURCES       = main.cpp \
 		PacManMachine.cpp \
 		StimulateScene.cpp \
 		PacMan.cpp \
-		StView.cpp moc_MainWindow.cpp \
+		StView.cpp \
+		Clock.cpp moc_MainWindow.cpp \
 		moc_PacManMachine.cpp \
 		moc_StimulateScene.cpp \
 		moc_PacMan.cpp \
-		moc_StView.cpp
+		moc_StView.cpp \
+		moc_Clock.cpp
 OBJECTS       = main.o \
 		MainWindow.o \
 		PacManMachine.o \
 		StimulateScene.o \
 		PacMan.o \
 		StView.o \
+		Clock.o \
 		moc_MainWindow.o \
 		moc_PacManMachine.o \
 		moc_StimulateScene.o \
 		moc_PacMan.o \
-		moc_StView.o
+		moc_StView.o \
+		moc_Clock.o
 DIST          = ../../Qt/5.6/gcc_64/mkspecs/features/spec_pre.prf \
 		../../Qt/5.6/gcc_64/mkspecs/common/unix.conf \
 		../../Qt/5.6/gcc_64/mkspecs/common/linux.conf \
@@ -207,12 +211,14 @@ DIST          = ../../Qt/5.6/gcc_64/mkspecs/features/spec_pre.prf \
 		PacManMachine.h \
 		StimulateScene.h \
 		PacMan.h \
-		StView.h main.cpp \
+		StView.h \
+		Clock.h main.cpp \
 		MainWindow.cpp \
 		PacManMachine.cpp \
 		StimulateScene.cpp \
 		PacMan.cpp \
-		StView.cpp
+		StView.cpp \
+		Clock.cpp
 QMAKE_TARGET  = DoXml
 DESTDIR       = 
 TARGET        = DoXml
@@ -517,8 +523,8 @@ dist: distdir FORCE
 distdir: FORCE
 	@test -d $(DISTDIR) || mkdir -p $(DISTDIR)
 	$(COPY_FILE) --parents $(DIST) $(DISTDIR)/
-	$(COPY_FILE) --parents MainWindow.h PacManMachine.h StimulateScene.h PacMan.h StView.h $(DISTDIR)/
-	$(COPY_FILE) --parents main.cpp MainWindow.cpp PacManMachine.cpp StimulateScene.cpp PacMan.cpp StView.cpp $(DISTDIR)/
+	$(COPY_FILE) --parents MainWindow.h PacManMachine.h StimulateScene.h PacMan.h StView.h Clock.h $(DISTDIR)/
+	$(COPY_FILE) --parents main.cpp MainWindow.cpp PacManMachine.cpp StimulateScene.cpp PacMan.cpp StView.cpp Clock.cpp $(DISTDIR)/
 
 
 clean: compiler_clean 
@@ -541,9 +547,9 @@ check: first
 
 compiler_rcc_make_all:
 compiler_rcc_clean:
-compiler_moc_header_make_all: moc_MainWindow.cpp moc_PacManMachine.cpp moc_StimulateScene.cpp moc_PacMan.cpp moc_StView.cpp
+compiler_moc_header_make_all: moc_MainWindow.cpp moc_PacManMachine.cpp moc_StimulateScene.cpp moc_PacMan.cpp moc_StView.cpp moc_Clock.cpp
 compiler_moc_header_clean:
-	-$(DEL_FILE) moc_MainWindow.cpp moc_PacManMachine.cpp moc_StimulateScene.cpp moc_PacMan.cpp moc_StView.cpp
+	-$(DEL_FILE) moc_MainWindow.cpp moc_PacManMachine.cpp moc_StimulateScene.cpp moc_PacMan.cpp moc_StView.cpp moc_Clock.cpp
 moc_MainWindow.cpp: ../../Qt/5.6/gcc_64/include/QtWidgets/QMainWindow \
 		../../Qt/5.6/gcc_64/include/QtWidgets/qmainwindow.h \
 		../../Qt/5.6/gcc_64/include/QtWidgets/qwidget.h \
@@ -652,6 +658,9 @@ moc_MainWindow.cpp: ../../Qt/5.6/gcc_64/include/QtWidgets/QMainWindow \
 		../../Qt/5.6/gcc_64/include/QtWidgets/qtabwidget.h \
 		../../Qt/5.6/gcc_64/include/QtGui/qicon.h \
 		StView.h \
+		../../Qt/5.6/gcc_64/include/QtCore/QTimer \
+		../../Qt/5.6/gcc_64/include/QtCore/qtimer.h \
+		../../Qt/5.6/gcc_64/include/QtCore/qbasictimer.h \
 		../../Qt/5.6/gcc_64/include/QtCore/QObject \
 		../../Qt/5.6/gcc_64/include/QtWidgets/QGraphicsView \
 		../../Qt/5.6/gcc_64/include/QtWidgets/qgraphicsview.h \
@@ -662,8 +671,12 @@ moc_MainWindow.cpp: ../../Qt/5.6/gcc_64/include/QtWidgets/QMainWindow \
 		../../Qt/5.6/gcc_64/include/QtWidgets/qabstractscrollarea.h \
 		../../Qt/5.6/gcc_64/include/QtWidgets/qframe.h \
 		../../Qt/5.6/gcc_64/include/QtWidgets/qgraphicsscene.h \
+		../../Qt/5.6/gcc_64/include/QtGui/QWheelEvent \
 		StimulateScene.h \
 		../../Qt/5.6/gcc_64/include/QtWidgets/QGraphicsScene \
+		Clock.h \
+		../../Qt/5.6/gcc_64/include/QtWidgets/QGraphicsTextItem \
+		../../Qt/5.6/gcc_64/include/QtWidgets/qgraphicsitem.h \
 		PacManMachine.h \
 		../../Qt/5.6/gcc_64/include/QtXml/QtXml \
 		../../Qt/5.6/gcc_64/include/QtXml/QtXmlDepends \
@@ -712,7 +725,6 @@ moc_MainWindow.cpp: ../../Qt/5.6/gcc_64/include/QtWidgets/QMainWindow \
 		../../Qt/5.6/gcc_64/include/QtCore/qabstracteventdispatcher.h \
 		../../Qt/5.6/gcc_64/include/QtCore/qeventloop.h \
 		../../Qt/5.6/gcc_64/include/QtCore/qabstractnativeeventfilter.h \
-		../../Qt/5.6/gcc_64/include/QtCore/qbasictimer.h \
 		../../Qt/5.6/gcc_64/include/QtCore/qcoreapplication.h \
 		../../Qt/5.6/gcc_64/include/QtCore/qmath.h \
 		../../Qt/5.6/gcc_64/include/QtCore/qmetaobject.h \
@@ -723,7 +735,6 @@ moc_MainWindow.cpp: ../../Qt/5.6/gcc_64/include/QtWidgets/QMainWindow \
 		../../Qt/5.6/gcc_64/include/QtCore/qsignalmapper.h \
 		../../Qt/5.6/gcc_64/include/QtCore/qsocketnotifier.h \
 		../../Qt/5.6/gcc_64/include/QtCore/qsystemsemaphore.h \
-		../../Qt/5.6/gcc_64/include/QtCore/qtimer.h \
 		../../Qt/5.6/gcc_64/include/QtCore/qtranslator.h \
 		../../Qt/5.6/gcc_64/include/QtCore/qwineventnotifier.h \
 		../../Qt/5.6/gcc_64/include/QtCore/qmimedatabase.h \
@@ -784,7 +795,6 @@ moc_MainWindow.cpp: ../../Qt/5.6/gcc_64/include/QtWidgets/QMainWindow \
 		PacMan.h \
 		../../Qt/5.6/gcc_64/include/QtGui/QColor \
 		../../Qt/5.6/gcc_64/include/QtWidgets/QGraphicsEllipseItem \
-		../../Qt/5.6/gcc_64/include/QtWidgets/qgraphicsitem.h \
 		MainWindow.h
 	/home/bj/Qt/5.6/gcc_64/bin/moc $(DEFINES) -I/home/bj/Qt/5.6/gcc_64/mkspecs/linux-g++ -I/home/bj/桌面/DoXml -I/home/bj/Qt/5.6/gcc_64/include -I/home/bj/Qt/5.6/gcc_64/include/QtWidgets -I/home/bj/Qt/5.6/gcc_64/include/QtGui -I/home/bj/Qt/5.6/gcc_64/include/QtXml -I/home/bj/Qt/5.6/gcc_64/include/QtCore MainWindow.h -o moc_MainWindow.cpp
 
@@ -1186,10 +1196,8 @@ moc_PacMan.cpp: ../../Qt/5.6/gcc_64/include/QtCore/QObject \
 		PacMan.h
 	/home/bj/Qt/5.6/gcc_64/bin/moc $(DEFINES) -I/home/bj/Qt/5.6/gcc_64/mkspecs/linux-g++ -I/home/bj/桌面/DoXml -I/home/bj/Qt/5.6/gcc_64/include -I/home/bj/Qt/5.6/gcc_64/include/QtWidgets -I/home/bj/Qt/5.6/gcc_64/include/QtGui -I/home/bj/Qt/5.6/gcc_64/include/QtXml -I/home/bj/Qt/5.6/gcc_64/include/QtCore PacMan.h -o moc_PacMan.cpp
 
-moc_StView.cpp: ../../Qt/5.6/gcc_64/include/QtCore/QObject \
-		../../Qt/5.6/gcc_64/include/QtCore/qobject.h \
-		../../Qt/5.6/gcc_64/include/QtCore/qobjectdefs.h \
-		../../Qt/5.6/gcc_64/include/QtCore/qnamespace.h \
+moc_StView.cpp: ../../Qt/5.6/gcc_64/include/QtCore/QTimer \
+		../../Qt/5.6/gcc_64/include/QtCore/qtimer.h \
 		../../Qt/5.6/gcc_64/include/QtCore/qglobal.h \
 		../../Qt/5.6/gcc_64/include/QtCore/qconfig.h \
 		../../Qt/5.6/gcc_64/include/QtCore/qfeatures.h \
@@ -1219,6 +1227,10 @@ moc_StView.cpp: ../../Qt/5.6/gcc_64/include/QtCore/QObject \
 		../../Qt/5.6/gcc_64/include/QtCore/qmutex.h \
 		../../Qt/5.6/gcc_64/include/QtCore/qnumeric.h \
 		../../Qt/5.6/gcc_64/include/QtCore/qversiontagging.h \
+		../../Qt/5.6/gcc_64/include/QtCore/qbasictimer.h \
+		../../Qt/5.6/gcc_64/include/QtCore/qnamespace.h \
+		../../Qt/5.6/gcc_64/include/QtCore/qobject.h \
+		../../Qt/5.6/gcc_64/include/QtCore/qobjectdefs.h \
 		../../Qt/5.6/gcc_64/include/QtCore/qobjectdefs_impl.h \
 		../../Qt/5.6/gcc_64/include/QtCore/qstring.h \
 		../../Qt/5.6/gcc_64/include/QtCore/qchar.h \
@@ -1241,6 +1253,7 @@ moc_StView.cpp: ../../Qt/5.6/gcc_64/include/QtCore/QObject \
 		../../Qt/5.6/gcc_64/include/QtCore/qvarlengtharray.h \
 		../../Qt/5.6/gcc_64/include/QtCore/qcontainerfwd.h \
 		../../Qt/5.6/gcc_64/include/QtCore/qobject_impl.h \
+		../../Qt/5.6/gcc_64/include/QtCore/QObject \
 		../../Qt/5.6/gcc_64/include/QtWidgets/QGraphicsView \
 		../../Qt/5.6/gcc_64/include/QtWidgets/qgraphicsview.h \
 		../../Qt/5.6/gcc_64/include/QtGui/qpainter.h \
@@ -1299,8 +1312,12 @@ moc_StView.cpp: ../../Qt/5.6/gcc_64/include/QtCore/QObject \
 		../../Qt/5.6/gcc_64/include/QtGui/qvector2d.h \
 		../../Qt/5.6/gcc_64/include/QtGui/qtouchdevice.h \
 		../../Qt/5.6/gcc_64/include/QtWidgets/qgraphicsscene.h \
+		../../Qt/5.6/gcc_64/include/QtGui/QWheelEvent \
 		StimulateScene.h \
 		../../Qt/5.6/gcc_64/include/QtWidgets/QGraphicsScene \
+		Clock.h \
+		../../Qt/5.6/gcc_64/include/QtWidgets/QGraphicsTextItem \
+		../../Qt/5.6/gcc_64/include/QtWidgets/qgraphicsitem.h \
 		PacManMachine.h \
 		../../Qt/5.6/gcc_64/include/QtXml/QtXml \
 		../../Qt/5.6/gcc_64/include/QtXml/QtXmlDepends \
@@ -1349,7 +1366,6 @@ moc_StView.cpp: ../../Qt/5.6/gcc_64/include/QtCore/QObject \
 		../../Qt/5.6/gcc_64/include/QtCore/qabstracteventdispatcher.h \
 		../../Qt/5.6/gcc_64/include/QtCore/qeventloop.h \
 		../../Qt/5.6/gcc_64/include/QtCore/qabstractnativeeventfilter.h \
-		../../Qt/5.6/gcc_64/include/QtCore/qbasictimer.h \
 		../../Qt/5.6/gcc_64/include/QtCore/qcoreapplication.h \
 		../../Qt/5.6/gcc_64/include/QtCore/qmath.h \
 		../../Qt/5.6/gcc_64/include/QtCore/qmetaobject.h \
@@ -1360,7 +1376,6 @@ moc_StView.cpp: ../../Qt/5.6/gcc_64/include/QtCore/QObject \
 		../../Qt/5.6/gcc_64/include/QtCore/qsignalmapper.h \
 		../../Qt/5.6/gcc_64/include/QtCore/qsocketnotifier.h \
 		../../Qt/5.6/gcc_64/include/QtCore/qsystemsemaphore.h \
-		../../Qt/5.6/gcc_64/include/QtCore/qtimer.h \
 		../../Qt/5.6/gcc_64/include/QtCore/qtranslator.h \
 		../../Qt/5.6/gcc_64/include/QtCore/qwineventnotifier.h \
 		../../Qt/5.6/gcc_64/include/QtCore/qmimedatabase.h \
@@ -1421,9 +1436,100 @@ moc_StView.cpp: ../../Qt/5.6/gcc_64/include/QtCore/QObject \
 		PacMan.h \
 		../../Qt/5.6/gcc_64/include/QtGui/QColor \
 		../../Qt/5.6/gcc_64/include/QtWidgets/QGraphicsEllipseItem \
-		../../Qt/5.6/gcc_64/include/QtWidgets/qgraphicsitem.h \
 		StView.h
 	/home/bj/Qt/5.6/gcc_64/bin/moc $(DEFINES) -I/home/bj/Qt/5.6/gcc_64/mkspecs/linux-g++ -I/home/bj/桌面/DoXml -I/home/bj/Qt/5.6/gcc_64/include -I/home/bj/Qt/5.6/gcc_64/include/QtWidgets -I/home/bj/Qt/5.6/gcc_64/include/QtGui -I/home/bj/Qt/5.6/gcc_64/include/QtXml -I/home/bj/Qt/5.6/gcc_64/include/QtCore StView.h -o moc_StView.cpp
+
+moc_Clock.cpp: ../../Qt/5.6/gcc_64/include/QtWidgets/QGraphicsTextItem \
+		../../Qt/5.6/gcc_64/include/QtWidgets/qgraphicsitem.h \
+		../../Qt/5.6/gcc_64/include/QtCore/qglobal.h \
+		../../Qt/5.6/gcc_64/include/QtCore/qconfig.h \
+		../../Qt/5.6/gcc_64/include/QtCore/qfeatures.h \
+		../../Qt/5.6/gcc_64/include/QtCore/qsystemdetection.h \
+		../../Qt/5.6/gcc_64/include/QtCore/qprocessordetection.h \
+		../../Qt/5.6/gcc_64/include/QtCore/qcompilerdetection.h \
+		../../Qt/5.6/gcc_64/include/QtCore/qtypeinfo.h \
+		../../Qt/5.6/gcc_64/include/QtCore/qtypetraits.h \
+		../../Qt/5.6/gcc_64/include/QtCore/qisenum.h \
+		../../Qt/5.6/gcc_64/include/QtCore/qsysinfo.h \
+		../../Qt/5.6/gcc_64/include/QtCore/qlogging.h \
+		../../Qt/5.6/gcc_64/include/QtCore/qflags.h \
+		../../Qt/5.6/gcc_64/include/QtCore/qatomic.h \
+		../../Qt/5.6/gcc_64/include/QtCore/qbasicatomic.h \
+		../../Qt/5.6/gcc_64/include/QtCore/qatomic_bootstrap.h \
+		../../Qt/5.6/gcc_64/include/QtCore/qgenericatomic.h \
+		../../Qt/5.6/gcc_64/include/QtCore/qatomic_cxx11.h \
+		../../Qt/5.6/gcc_64/include/QtCore/qatomic_gcc.h \
+		../../Qt/5.6/gcc_64/include/QtCore/qatomic_msvc.h \
+		../../Qt/5.6/gcc_64/include/QtCore/qatomic_armv7.h \
+		../../Qt/5.6/gcc_64/include/QtCore/qatomic_armv6.h \
+		../../Qt/5.6/gcc_64/include/QtCore/qatomic_armv5.h \
+		../../Qt/5.6/gcc_64/include/QtCore/qatomic_ia64.h \
+		../../Qt/5.6/gcc_64/include/QtCore/qatomic_x86.h \
+		../../Qt/5.6/gcc_64/include/QtCore/qatomic_unix.h \
+		../../Qt/5.6/gcc_64/include/QtCore/qglobalstatic.h \
+		../../Qt/5.6/gcc_64/include/QtCore/qmutex.h \
+		../../Qt/5.6/gcc_64/include/QtCore/qnumeric.h \
+		../../Qt/5.6/gcc_64/include/QtCore/qversiontagging.h \
+		../../Qt/5.6/gcc_64/include/QtCore/qobject.h \
+		../../Qt/5.6/gcc_64/include/QtCore/qobjectdefs.h \
+		../../Qt/5.6/gcc_64/include/QtCore/qnamespace.h \
+		../../Qt/5.6/gcc_64/include/QtCore/qobjectdefs_impl.h \
+		../../Qt/5.6/gcc_64/include/QtCore/qstring.h \
+		../../Qt/5.6/gcc_64/include/QtCore/qchar.h \
+		../../Qt/5.6/gcc_64/include/QtCore/qbytearray.h \
+		../../Qt/5.6/gcc_64/include/QtCore/qrefcount.h \
+		../../Qt/5.6/gcc_64/include/QtCore/qarraydata.h \
+		../../Qt/5.6/gcc_64/include/QtCore/qstringbuilder.h \
+		../../Qt/5.6/gcc_64/include/QtCore/qlist.h \
+		../../Qt/5.6/gcc_64/include/QtCore/qalgorithms.h \
+		../../Qt/5.6/gcc_64/include/QtCore/qiterator.h \
+		../../Qt/5.6/gcc_64/include/QtCore/qhashfunctions.h \
+		../../Qt/5.6/gcc_64/include/QtCore/qpair.h \
+		../../Qt/5.6/gcc_64/include/QtCore/qbytearraylist.h \
+		../../Qt/5.6/gcc_64/include/QtCore/qstringlist.h \
+		../../Qt/5.6/gcc_64/include/QtCore/qregexp.h \
+		../../Qt/5.6/gcc_64/include/QtCore/qstringmatcher.h \
+		../../Qt/5.6/gcc_64/include/QtCore/qcoreevent.h \
+		../../Qt/5.6/gcc_64/include/QtCore/qscopedpointer.h \
+		../../Qt/5.6/gcc_64/include/QtCore/qmetatype.h \
+		../../Qt/5.6/gcc_64/include/QtCore/qvarlengtharray.h \
+		../../Qt/5.6/gcc_64/include/QtCore/qcontainerfwd.h \
+		../../Qt/5.6/gcc_64/include/QtCore/qobject_impl.h \
+		../../Qt/5.6/gcc_64/include/QtCore/qvariant.h \
+		../../Qt/5.6/gcc_64/include/QtCore/qmap.h \
+		../../Qt/5.6/gcc_64/include/QtCore/qdebug.h \
+		../../Qt/5.6/gcc_64/include/QtCore/qhash.h \
+		../../Qt/5.6/gcc_64/include/QtCore/qtextstream.h \
+		../../Qt/5.6/gcc_64/include/QtCore/qiodevice.h \
+		../../Qt/5.6/gcc_64/include/QtCore/qlocale.h \
+		../../Qt/5.6/gcc_64/include/QtCore/qshareddata.h \
+		../../Qt/5.6/gcc_64/include/QtCore/qvector.h \
+		../../Qt/5.6/gcc_64/include/QtCore/qpoint.h \
+		../../Qt/5.6/gcc_64/include/QtCore/qset.h \
+		../../Qt/5.6/gcc_64/include/QtCore/qcontiguouscache.h \
+		../../Qt/5.6/gcc_64/include/QtCore/qrect.h \
+		../../Qt/5.6/gcc_64/include/QtCore/qmargins.h \
+		../../Qt/5.6/gcc_64/include/QtCore/qsize.h \
+		../../Qt/5.6/gcc_64/include/QtGui/qpainterpath.h \
+		../../Qt/5.6/gcc_64/include/QtGui/qmatrix.h \
+		../../Qt/5.6/gcc_64/include/QtGui/qpolygon.h \
+		../../Qt/5.6/gcc_64/include/QtGui/qregion.h \
+		../../Qt/5.6/gcc_64/include/QtGui/qwindowdefs.h \
+		../../Qt/5.6/gcc_64/include/QtGui/qwindowdefs_win.h \
+		../../Qt/5.6/gcc_64/include/QtCore/qdatastream.h \
+		../../Qt/5.6/gcc_64/include/QtCore/qline.h \
+		../../Qt/5.6/gcc_64/include/QtGui/qpixmap.h \
+		../../Qt/5.6/gcc_64/include/QtGui/qpaintdevice.h \
+		../../Qt/5.6/gcc_64/include/QtGui/qcolor.h \
+		../../Qt/5.6/gcc_64/include/QtGui/qrgb.h \
+		../../Qt/5.6/gcc_64/include/QtGui/qrgba64.h \
+		../../Qt/5.6/gcc_64/include/QtCore/qsharedpointer.h \
+		../../Qt/5.6/gcc_64/include/QtCore/qsharedpointer_impl.h \
+		../../Qt/5.6/gcc_64/include/QtGui/qimage.h \
+		../../Qt/5.6/gcc_64/include/QtGui/qpixelformat.h \
+		../../Qt/5.6/gcc_64/include/QtGui/qtransform.h \
+		Clock.h
+	/home/bj/Qt/5.6/gcc_64/bin/moc $(DEFINES) -I/home/bj/Qt/5.6/gcc_64/mkspecs/linux-g++ -I/home/bj/桌面/DoXml -I/home/bj/Qt/5.6/gcc_64/include -I/home/bj/Qt/5.6/gcc_64/include/QtWidgets -I/home/bj/Qt/5.6/gcc_64/include/QtGui -I/home/bj/Qt/5.6/gcc_64/include/QtXml -I/home/bj/Qt/5.6/gcc_64/include/QtCore Clock.h -o moc_Clock.cpp
 
 compiler_moc_source_make_all:
 compiler_moc_source_clean:
@@ -1555,6 +1661,9 @@ main.o: main.cpp ../../Qt/5.6/gcc_64/include/QtWidgets/QApplication \
 		../../Qt/5.6/gcc_64/include/QtWidgets/qtabwidget.h \
 		../../Qt/5.6/gcc_64/include/QtGui/qicon.h \
 		StView.h \
+		../../Qt/5.6/gcc_64/include/QtCore/QTimer \
+		../../Qt/5.6/gcc_64/include/QtCore/qtimer.h \
+		../../Qt/5.6/gcc_64/include/QtCore/qbasictimer.h \
 		../../Qt/5.6/gcc_64/include/QtCore/QObject \
 		../../Qt/5.6/gcc_64/include/QtWidgets/QGraphicsView \
 		../../Qt/5.6/gcc_64/include/QtWidgets/qgraphicsview.h \
@@ -1565,8 +1674,12 @@ main.o: main.cpp ../../Qt/5.6/gcc_64/include/QtWidgets/QApplication \
 		../../Qt/5.6/gcc_64/include/QtWidgets/qabstractscrollarea.h \
 		../../Qt/5.6/gcc_64/include/QtWidgets/qframe.h \
 		../../Qt/5.6/gcc_64/include/QtWidgets/qgraphicsscene.h \
+		../../Qt/5.6/gcc_64/include/QtGui/QWheelEvent \
 		StimulateScene.h \
 		../../Qt/5.6/gcc_64/include/QtWidgets/QGraphicsScene \
+		Clock.h \
+		../../Qt/5.6/gcc_64/include/QtWidgets/QGraphicsTextItem \
+		../../Qt/5.6/gcc_64/include/QtWidgets/qgraphicsitem.h \
 		PacManMachine.h \
 		../../Qt/5.6/gcc_64/include/QtXml/QtXml \
 		../../Qt/5.6/gcc_64/include/QtXml/QtXmlDepends \
@@ -1614,7 +1727,6 @@ main.o: main.cpp ../../Qt/5.6/gcc_64/include/QtWidgets/QApplication \
 		../../Qt/5.6/gcc_64/include/QtCore/qjsonobject.h \
 		../../Qt/5.6/gcc_64/include/QtCore/qabstracteventdispatcher.h \
 		../../Qt/5.6/gcc_64/include/QtCore/qabstractnativeeventfilter.h \
-		../../Qt/5.6/gcc_64/include/QtCore/qbasictimer.h \
 		../../Qt/5.6/gcc_64/include/QtCore/qmath.h \
 		../../Qt/5.6/gcc_64/include/QtCore/qmetaobject.h \
 		../../Qt/5.6/gcc_64/include/QtCore/qmimedata.h \
@@ -1624,7 +1736,6 @@ main.o: main.cpp ../../Qt/5.6/gcc_64/include/QtWidgets/QApplication \
 		../../Qt/5.6/gcc_64/include/QtCore/qsignalmapper.h \
 		../../Qt/5.6/gcc_64/include/QtCore/qsocketnotifier.h \
 		../../Qt/5.6/gcc_64/include/QtCore/qsystemsemaphore.h \
-		../../Qt/5.6/gcc_64/include/QtCore/qtimer.h \
 		../../Qt/5.6/gcc_64/include/QtCore/qtranslator.h \
 		../../Qt/5.6/gcc_64/include/QtCore/qwineventnotifier.h \
 		../../Qt/5.6/gcc_64/include/QtCore/qmimedatabase.h \
@@ -1684,8 +1795,7 @@ main.o: main.cpp ../../Qt/5.6/gcc_64/include/QtWidgets/QApplication \
 		../../Qt/5.6/gcc_64/include/QtCore/QFile \
 		PacMan.h \
 		../../Qt/5.6/gcc_64/include/QtGui/QColor \
-		../../Qt/5.6/gcc_64/include/QtWidgets/QGraphicsEllipseItem \
-		../../Qt/5.6/gcc_64/include/QtWidgets/qgraphicsitem.h
+		../../Qt/5.6/gcc_64/include/QtWidgets/QGraphicsEllipseItem
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o main.o main.cpp
 
 MainWindow.o: MainWindow.cpp MainWindow.h \
@@ -1797,6 +1907,9 @@ MainWindow.o: MainWindow.cpp MainWindow.h \
 		../../Qt/5.6/gcc_64/include/QtWidgets/qtabwidget.h \
 		../../Qt/5.6/gcc_64/include/QtGui/qicon.h \
 		StView.h \
+		../../Qt/5.6/gcc_64/include/QtCore/QTimer \
+		../../Qt/5.6/gcc_64/include/QtCore/qtimer.h \
+		../../Qt/5.6/gcc_64/include/QtCore/qbasictimer.h \
 		../../Qt/5.6/gcc_64/include/QtCore/QObject \
 		../../Qt/5.6/gcc_64/include/QtWidgets/QGraphicsView \
 		../../Qt/5.6/gcc_64/include/QtWidgets/qgraphicsview.h \
@@ -1807,8 +1920,12 @@ MainWindow.o: MainWindow.cpp MainWindow.h \
 		../../Qt/5.6/gcc_64/include/QtWidgets/qabstractscrollarea.h \
 		../../Qt/5.6/gcc_64/include/QtWidgets/qframe.h \
 		../../Qt/5.6/gcc_64/include/QtWidgets/qgraphicsscene.h \
+		../../Qt/5.6/gcc_64/include/QtGui/QWheelEvent \
 		StimulateScene.h \
 		../../Qt/5.6/gcc_64/include/QtWidgets/QGraphicsScene \
+		Clock.h \
+		../../Qt/5.6/gcc_64/include/QtWidgets/QGraphicsTextItem \
+		../../Qt/5.6/gcc_64/include/QtWidgets/qgraphicsitem.h \
 		PacManMachine.h \
 		../../Qt/5.6/gcc_64/include/QtXml/QtXml \
 		../../Qt/5.6/gcc_64/include/QtXml/QtXmlDepends \
@@ -1857,7 +1974,6 @@ MainWindow.o: MainWindow.cpp MainWindow.h \
 		../../Qt/5.6/gcc_64/include/QtCore/qabstracteventdispatcher.h \
 		../../Qt/5.6/gcc_64/include/QtCore/qeventloop.h \
 		../../Qt/5.6/gcc_64/include/QtCore/qabstractnativeeventfilter.h \
-		../../Qt/5.6/gcc_64/include/QtCore/qbasictimer.h \
 		../../Qt/5.6/gcc_64/include/QtCore/qcoreapplication.h \
 		../../Qt/5.6/gcc_64/include/QtCore/qmath.h \
 		../../Qt/5.6/gcc_64/include/QtCore/qmetaobject.h \
@@ -1868,7 +1984,6 @@ MainWindow.o: MainWindow.cpp MainWindow.h \
 		../../Qt/5.6/gcc_64/include/QtCore/qsignalmapper.h \
 		../../Qt/5.6/gcc_64/include/QtCore/qsocketnotifier.h \
 		../../Qt/5.6/gcc_64/include/QtCore/qsystemsemaphore.h \
-		../../Qt/5.6/gcc_64/include/QtCore/qtimer.h \
 		../../Qt/5.6/gcc_64/include/QtCore/qtranslator.h \
 		../../Qt/5.6/gcc_64/include/QtCore/qwineventnotifier.h \
 		../../Qt/5.6/gcc_64/include/QtCore/qmimedatabase.h \
@@ -1928,8 +2043,7 @@ MainWindow.o: MainWindow.cpp MainWindow.h \
 		../../Qt/5.6/gcc_64/include/QtCore/QFile \
 		PacMan.h \
 		../../Qt/5.6/gcc_64/include/QtGui/QColor \
-		../../Qt/5.6/gcc_64/include/QtWidgets/QGraphicsEllipseItem \
-		../../Qt/5.6/gcc_64/include/QtWidgets/qgraphicsitem.h
+		../../Qt/5.6/gcc_64/include/QtWidgets/QGraphicsEllipseItem
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o MainWindow.o MainWindow.cpp
 
 PacManMachine.o: PacManMachine.cpp ../../Qt/5.6/gcc_64/include/QtGui/QColor \
@@ -2429,7 +2543,13 @@ StView.o: StView.cpp ../../Qt/5.6/gcc_64/include/QtGui/QPixmap \
 		../../Qt/5.6/gcc_64/include/QtCore/qvariant.h \
 		../../Qt/5.6/gcc_64/include/QtCore/qset.h \
 		../../Qt/5.6/gcc_64/include/QtCore/qcontiguouscache.h \
+		../../Qt/5.6/gcc_64/include/QtCore/QTimeLine \
+		../../Qt/5.6/gcc_64/include/QtCore/qtimeline.h \
+		../../Qt/5.6/gcc_64/include/QtCore/qeasingcurve.h \
 		StView.h \
+		../../Qt/5.6/gcc_64/include/QtCore/QTimer \
+		../../Qt/5.6/gcc_64/include/QtCore/qtimer.h \
+		../../Qt/5.6/gcc_64/include/QtCore/qbasictimer.h \
 		../../Qt/5.6/gcc_64/include/QtCore/QObject \
 		../../Qt/5.6/gcc_64/include/QtWidgets/QGraphicsView \
 		../../Qt/5.6/gcc_64/include/QtWidgets/qgraphicsview.h \
@@ -2455,8 +2575,12 @@ StView.o: StView.cpp ../../Qt/5.6/gcc_64/include/QtGui/QPixmap \
 		../../Qt/5.6/gcc_64/include/QtGui/qvector2d.h \
 		../../Qt/5.6/gcc_64/include/QtGui/qtouchdevice.h \
 		../../Qt/5.6/gcc_64/include/QtWidgets/qgraphicsscene.h \
+		../../Qt/5.6/gcc_64/include/QtGui/QWheelEvent \
 		StimulateScene.h \
 		../../Qt/5.6/gcc_64/include/QtWidgets/QGraphicsScene \
+		Clock.h \
+		../../Qt/5.6/gcc_64/include/QtWidgets/QGraphicsTextItem \
+		../../Qt/5.6/gcc_64/include/QtWidgets/qgraphicsitem.h \
 		PacManMachine.h \
 		../../Qt/5.6/gcc_64/include/QtXml/QtXml \
 		../../Qt/5.6/gcc_64/include/QtXml/QtXmlDepends \
@@ -2468,7 +2592,6 @@ StView.o: StView.cpp ../../Qt/5.6/gcc_64/include/QtGui/QPixmap \
 		../../Qt/5.6/gcc_64/include/QtCore/qpauseanimation.h \
 		../../Qt/5.6/gcc_64/include/QtCore/qpropertyanimation.h \
 		../../Qt/5.6/gcc_64/include/QtCore/qvariantanimation.h \
-		../../Qt/5.6/gcc_64/include/QtCore/qeasingcurve.h \
 		../../Qt/5.6/gcc_64/include/QtCore/qsequentialanimationgroup.h \
 		../../Qt/5.6/gcc_64/include/QtCore/qtextcodec.h \
 		../../Qt/5.6/gcc_64/include/QtCore/qendian.h \
@@ -2505,7 +2628,6 @@ StView.o: StView.cpp ../../Qt/5.6/gcc_64/include/QtGui/QPixmap \
 		../../Qt/5.6/gcc_64/include/QtCore/qabstracteventdispatcher.h \
 		../../Qt/5.6/gcc_64/include/QtCore/qeventloop.h \
 		../../Qt/5.6/gcc_64/include/QtCore/qabstractnativeeventfilter.h \
-		../../Qt/5.6/gcc_64/include/QtCore/qbasictimer.h \
 		../../Qt/5.6/gcc_64/include/QtCore/qcoreapplication.h \
 		../../Qt/5.6/gcc_64/include/QtCore/qmath.h \
 		../../Qt/5.6/gcc_64/include/QtCore/qmetaobject.h \
@@ -2516,7 +2638,6 @@ StView.o: StView.cpp ../../Qt/5.6/gcc_64/include/QtGui/QPixmap \
 		../../Qt/5.6/gcc_64/include/QtCore/qsignalmapper.h \
 		../../Qt/5.6/gcc_64/include/QtCore/qsocketnotifier.h \
 		../../Qt/5.6/gcc_64/include/QtCore/qsystemsemaphore.h \
-		../../Qt/5.6/gcc_64/include/QtCore/qtimer.h \
 		../../Qt/5.6/gcc_64/include/QtCore/qtranslator.h \
 		../../Qt/5.6/gcc_64/include/QtCore/qwineventnotifier.h \
 		../../Qt/5.6/gcc_64/include/QtCore/qmimedatabase.h \
@@ -2564,7 +2685,6 @@ StView.o: StView.cpp ../../Qt/5.6/gcc_64/include/QtGui/QPixmap \
 		../../Qt/5.6/gcc_64/include/QtCore/qscopedvaluerollback.h \
 		../../Qt/5.6/gcc_64/include/QtCore/qstack.h \
 		../../Qt/5.6/gcc_64/include/QtCore/qtextboundaryfinder.h \
-		../../Qt/5.6/gcc_64/include/QtCore/qtimeline.h \
 		../../Qt/5.6/gcc_64/include/QtCore/qtimezone.h \
 		../../Qt/5.6/gcc_64/include/QtCore/qversionnumber.h \
 		../../Qt/5.6/gcc_64/include/QtCore/qxmlstream.h \
@@ -2576,9 +2696,102 @@ StView.o: StView.cpp ../../Qt/5.6/gcc_64/include/QtGui/QPixmap \
 		../../Qt/5.6/gcc_64/include/QtCore/QFile \
 		PacMan.h \
 		../../Qt/5.6/gcc_64/include/QtGui/QColor \
-		../../Qt/5.6/gcc_64/include/QtWidgets/QGraphicsEllipseItem \
-		../../Qt/5.6/gcc_64/include/QtWidgets/qgraphicsitem.h
+		../../Qt/5.6/gcc_64/include/QtWidgets/QGraphicsEllipseItem
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o StView.o StView.cpp
+
+Clock.o: Clock.cpp ../../Qt/5.6/gcc_64/include/QtGui/QFont \
+		../../Qt/5.6/gcc_64/include/QtGui/qfont.h \
+		../../Qt/5.6/gcc_64/include/QtGui/qwindowdefs.h \
+		../../Qt/5.6/gcc_64/include/QtCore/qglobal.h \
+		../../Qt/5.6/gcc_64/include/QtCore/qconfig.h \
+		../../Qt/5.6/gcc_64/include/QtCore/qfeatures.h \
+		../../Qt/5.6/gcc_64/include/QtCore/qsystemdetection.h \
+		../../Qt/5.6/gcc_64/include/QtCore/qprocessordetection.h \
+		../../Qt/5.6/gcc_64/include/QtCore/qcompilerdetection.h \
+		../../Qt/5.6/gcc_64/include/QtCore/qtypeinfo.h \
+		../../Qt/5.6/gcc_64/include/QtCore/qtypetraits.h \
+		../../Qt/5.6/gcc_64/include/QtCore/qisenum.h \
+		../../Qt/5.6/gcc_64/include/QtCore/qsysinfo.h \
+		../../Qt/5.6/gcc_64/include/QtCore/qlogging.h \
+		../../Qt/5.6/gcc_64/include/QtCore/qflags.h \
+		../../Qt/5.6/gcc_64/include/QtCore/qatomic.h \
+		../../Qt/5.6/gcc_64/include/QtCore/qbasicatomic.h \
+		../../Qt/5.6/gcc_64/include/QtCore/qatomic_bootstrap.h \
+		../../Qt/5.6/gcc_64/include/QtCore/qgenericatomic.h \
+		../../Qt/5.6/gcc_64/include/QtCore/qatomic_cxx11.h \
+		../../Qt/5.6/gcc_64/include/QtCore/qatomic_gcc.h \
+		../../Qt/5.6/gcc_64/include/QtCore/qatomic_msvc.h \
+		../../Qt/5.6/gcc_64/include/QtCore/qatomic_armv7.h \
+		../../Qt/5.6/gcc_64/include/QtCore/qatomic_armv6.h \
+		../../Qt/5.6/gcc_64/include/QtCore/qatomic_armv5.h \
+		../../Qt/5.6/gcc_64/include/QtCore/qatomic_ia64.h \
+		../../Qt/5.6/gcc_64/include/QtCore/qatomic_x86.h \
+		../../Qt/5.6/gcc_64/include/QtCore/qatomic_unix.h \
+		../../Qt/5.6/gcc_64/include/QtCore/qglobalstatic.h \
+		../../Qt/5.6/gcc_64/include/QtCore/qmutex.h \
+		../../Qt/5.6/gcc_64/include/QtCore/qnumeric.h \
+		../../Qt/5.6/gcc_64/include/QtCore/qversiontagging.h \
+		../../Qt/5.6/gcc_64/include/QtCore/qobjectdefs.h \
+		../../Qt/5.6/gcc_64/include/QtCore/qnamespace.h \
+		../../Qt/5.6/gcc_64/include/QtCore/qobjectdefs_impl.h \
+		../../Qt/5.6/gcc_64/include/QtGui/qwindowdefs_win.h \
+		../../Qt/5.6/gcc_64/include/QtCore/qstring.h \
+		../../Qt/5.6/gcc_64/include/QtCore/qchar.h \
+		../../Qt/5.6/gcc_64/include/QtCore/qbytearray.h \
+		../../Qt/5.6/gcc_64/include/QtCore/qrefcount.h \
+		../../Qt/5.6/gcc_64/include/QtCore/qarraydata.h \
+		../../Qt/5.6/gcc_64/include/QtCore/qstringbuilder.h \
+		../../Qt/5.6/gcc_64/include/QtCore/qsharedpointer.h \
+		../../Qt/5.6/gcc_64/include/QtCore/qshareddata.h \
+		../../Qt/5.6/gcc_64/include/QtCore/qhash.h \
+		../../Qt/5.6/gcc_64/include/QtCore/qiterator.h \
+		../../Qt/5.6/gcc_64/include/QtCore/qlist.h \
+		../../Qt/5.6/gcc_64/include/QtCore/qalgorithms.h \
+		../../Qt/5.6/gcc_64/include/QtCore/qhashfunctions.h \
+		../../Qt/5.6/gcc_64/include/QtCore/qpair.h \
+		../../Qt/5.6/gcc_64/include/QtCore/qbytearraylist.h \
+		../../Qt/5.6/gcc_64/include/QtCore/qstringlist.h \
+		../../Qt/5.6/gcc_64/include/QtCore/qregexp.h \
+		../../Qt/5.6/gcc_64/include/QtCore/qstringmatcher.h \
+		../../Qt/5.6/gcc_64/include/QtCore/qsharedpointer_impl.h \
+		../../Qt/5.6/gcc_64/include/QtCore/qobject.h \
+		../../Qt/5.6/gcc_64/include/QtCore/qcoreevent.h \
+		../../Qt/5.6/gcc_64/include/QtCore/qscopedpointer.h \
+		../../Qt/5.6/gcc_64/include/QtCore/qmetatype.h \
+		../../Qt/5.6/gcc_64/include/QtCore/qvarlengtharray.h \
+		../../Qt/5.6/gcc_64/include/QtCore/qcontainerfwd.h \
+		../../Qt/5.6/gcc_64/include/QtCore/qobject_impl.h \
+		Clock.h \
+		../../Qt/5.6/gcc_64/include/QtWidgets/QGraphicsTextItem \
+		../../Qt/5.6/gcc_64/include/QtWidgets/qgraphicsitem.h \
+		../../Qt/5.6/gcc_64/include/QtCore/qvariant.h \
+		../../Qt/5.6/gcc_64/include/QtCore/qmap.h \
+		../../Qt/5.6/gcc_64/include/QtCore/qdebug.h \
+		../../Qt/5.6/gcc_64/include/QtCore/qtextstream.h \
+		../../Qt/5.6/gcc_64/include/QtCore/qiodevice.h \
+		../../Qt/5.6/gcc_64/include/QtCore/qlocale.h \
+		../../Qt/5.6/gcc_64/include/QtCore/qvector.h \
+		../../Qt/5.6/gcc_64/include/QtCore/qpoint.h \
+		../../Qt/5.6/gcc_64/include/QtCore/qset.h \
+		../../Qt/5.6/gcc_64/include/QtCore/qcontiguouscache.h \
+		../../Qt/5.6/gcc_64/include/QtCore/qrect.h \
+		../../Qt/5.6/gcc_64/include/QtCore/qmargins.h \
+		../../Qt/5.6/gcc_64/include/QtCore/qsize.h \
+		../../Qt/5.6/gcc_64/include/QtGui/qpainterpath.h \
+		../../Qt/5.6/gcc_64/include/QtGui/qmatrix.h \
+		../../Qt/5.6/gcc_64/include/QtGui/qpolygon.h \
+		../../Qt/5.6/gcc_64/include/QtGui/qregion.h \
+		../../Qt/5.6/gcc_64/include/QtCore/qdatastream.h \
+		../../Qt/5.6/gcc_64/include/QtCore/qline.h \
+		../../Qt/5.6/gcc_64/include/QtGui/qpixmap.h \
+		../../Qt/5.6/gcc_64/include/QtGui/qpaintdevice.h \
+		../../Qt/5.6/gcc_64/include/QtGui/qcolor.h \
+		../../Qt/5.6/gcc_64/include/QtGui/qrgb.h \
+		../../Qt/5.6/gcc_64/include/QtGui/qrgba64.h \
+		../../Qt/5.6/gcc_64/include/QtGui/qimage.h \
+		../../Qt/5.6/gcc_64/include/QtGui/qpixelformat.h \
+		../../Qt/5.6/gcc_64/include/QtGui/qtransform.h
+	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o Clock.o Clock.cpp
 
 moc_MainWindow.o: moc_MainWindow.cpp 
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o moc_MainWindow.o moc_MainWindow.cpp
@@ -2594,6 +2807,9 @@ moc_PacMan.o: moc_PacMan.cpp
 
 moc_StView.o: moc_StView.cpp 
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o moc_StView.o moc_StView.cpp
+
+moc_Clock.o: moc_Clock.cpp 
+	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o moc_Clock.o moc_Clock.cpp
 
 ####### Install
 

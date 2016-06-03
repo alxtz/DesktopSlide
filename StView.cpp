@@ -3,6 +3,7 @@
 #include <QBrush>
 #include <QImage>
 #include <QDebug>
+#include <QTimeLine>
 #include "StView.h"
 
 using namespace std;
@@ -10,6 +11,10 @@ using namespace std;
 StView::StView(QWidget * parent)
  : QGraphicsView(parent)
 {
+    //設定視窗
+    setHorizontalScrollBarPolicy (Qt::ScrollBarAlwaysOff);
+    setVerticalScrollBarPolicy (Qt::ScrollBarAlwaysOff);
+
     //設定moveTimer
     moveTimer = new QTimer();
     moveTimer->setTimerType (Qt::PreciseTimer);
@@ -29,7 +34,6 @@ StView::StView(QWidget * parent)
     {
         cout<<"第"<<i+1<<"隻pacMan的startSec為"<<pacManMachine->pacManList.at(i)->startSec<<endl;
     }
-    pacManMachine->spawnPacMans ();
 
     //設定背景圖片
     backgroundPath = "./Data/" + pacManMachine->imageFile;
@@ -49,6 +53,54 @@ StView::StView(QWidget * parent)
 
     //設定title
     parent->setWindowTitle (pacManMachine->title);
+
+    //設定clock
+    clock = new Clock();
+    clock->setPos (QImage(backgroundPath).width() * pacManMachine->clockPosX , QImage(backgroundPath).height() * pacManMachine->clockPosY);
+    clockTimer = new QTimer();
+    clockTimer->setTimerType (Qt::PreciseTimer);
+    connect(clockTimer , SIGNAL(timeout()) , clock , SLOT(addSec()) );
+
+    //開始模擬
+    pacManMachine->spawnPacMans ();
+    clockTimer->start(1000);
+    stimulateScene->addItem (clock);
+
+}
+
+void StView::wheelEvent(QWheelEvent *event)
+{
+    if(event->delta()>0)
+    {
+        cout<<"放大"<<endl;
+        currentScale+=event->delta();
+    }
+    else
+    {
+        cout<<"縮小"<<endl;
+        currentScale+=event->delta();
+    }
+
+    if(currentScale<scaleMax)
+    {
+        cout<<"拉回來"<<endl;
+        currentScale-=event->delta();
+        return;
+    }
+
+    double factor = event->delta()/100.0;
+    if(event->delta()>0)
+    {
+        factor = factor;
+    }
+    else
+    {
+        factor = -1/factor;
+    }
+
+    scale(factor , factor);
+
+    cout<<"currentScale為"<<currentScale<<endl;
 }
 
 void StView::addPacMan(PacMan * pacMan)

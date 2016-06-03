@@ -4,6 +4,7 @@
 #include <QTimer>
 #include "PacManMachine.h"
 #include "PacMan.h"
+#include "PacWoman.h"
 
 using namespace std;
 
@@ -86,6 +87,7 @@ void PacManMachine::readCsv()
 
     int type;
     int radius;
+    int width , height;
     string RGB;
     int R;
     int G;
@@ -102,13 +104,21 @@ void PacManMachine::readCsv()
     {
         csvFile>>foo;
         cout<<"type為"<<type<<endl;
-        csvFile>>radius>>foo;
-        cout<<"半徑為"<<radius<<endl;
+        if(type==1)
+        {
+            csvFile>>radius>>foo;
+            cout<<"半徑為"<<radius<<endl;
+        }
+        else if(type==2)
+        {
+            csvFile>>width>>foo>>height>>foo;
+        }
         getline(csvFile , RGB , ',' );
         cout<<"RGB為"<<RGB<<endl;
         R = (RGB[0]-48)*100 + (RGB[1]-48)*10 +(RGB[2]-48);
         G = (RGB[3]-48)*100 + (RGB[4]-48)*10 +(RGB[5]-48);
         B = (RGB[6]-48)*100 + (RGB[7]-48)*10 +(RGB[8]-48);
+        if(RGB=="0")  R=0 , G=0 , B = 0;
         cout<<"R為"<<R<<",G為"<<G<<",B為"<<B<<endl;
         csvFile>>startX>>foo;
         csvFile>>startY>>foo;
@@ -135,7 +145,6 @@ void PacManMachine::readCsv()
         if(type==1)
         {
             PacMan * pacMan = new PacMan(radius , QColor(R , G , B) , startX , startY , endX , endY , startSec , endSec);
-            cout<<"讀檔pacMan的startSec為"<<startSec<<endl;
             pacManList.push_back (pacMan);
         }
         else if(type==2)
@@ -165,21 +174,16 @@ void PacManMachine::sortPacMans()
 void PacManMachine::spawnPacMans()
 {
     pacManCount = 0;
-
     for(int i=0; i<pacManList.size (); ++i)
     {
-            //如果是第一次生成
-            int sec;
-            sec = pacManList.at(i)->startSec;
-            //spawnTimer->start (sec*1000);
-            QTimer::singleShot(sec*1000 , this , SLOT(emitSignal()) );
+        QTimer::singleShot(pacManList.at(i)->startSec*1000 , this , SLOT(emitSignal()) );
     }
 }
 
 void PacManMachine::emitSignal()
 {
     emit setPacMan (pacManList.at(pacManCount));
-    pacManCount++;
+    ++pacManCount;
 }
 
 void PacManMachine::swapPacMan(int a, int b)
