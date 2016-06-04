@@ -5,8 +5,9 @@
 #include <QObject>
 #include <QColor>
 #include <QGraphicsEllipseItem>
+#include <QGraphicsPixmapItem>
 
-class PacMan : public QObject , public QGraphicsEllipseItem
+class PacMan : public QObject , public QGraphicsPixmapItem
 {
     Q_OBJECT
 
@@ -14,8 +15,10 @@ class PacMan : public QObject , public QGraphicsEllipseItem
 
     public:
         PacMan(int radius , QColor color , double startX , double startY , double endX , double endY , int startSec , int endSec);
+        PacMan(int width , int height , QColor color , double startX , double startY , double endX , double endY , int startSec , int endSec);
 
         int radius;
+        int width , height;
         QColor color;
         double startX;
         double startY;

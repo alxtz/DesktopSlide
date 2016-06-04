@@ -28,11 +28,11 @@ StView::StView(QWidget * parent)
     connect (pacManMachine , SIGNAL(setPacMan(PacMan * )) , this , SLOT(addPacMan(PacMan *)) );
     pacManMachine->readXml ();
     pacManMachine->readCsv ();
-    cout<<"pacManList有"<<pacManMachine->pacManList.size ()<<"隻pacMan"<<endl;
+    cout<<"pacManList有"<<pacManMachine->pacManList->size ()<<"隻pacMan"<<endl;
     pacManMachine->sortPacMans ();
     for(int i=0; i<6; ++i)
     {
-        cout<<"第"<<i+1<<"隻pacMan的startSec為"<<pacManMachine->pacManList.at(i)->startSec<<endl;
+        cout<<"第"<<i+1<<"隻pacMan的startSec為"<<pacManMachine->pacManList->at(i)->startSec<<endl;
     }
 
     //設定背景圖片
@@ -60,12 +60,12 @@ StView::StView(QWidget * parent)
     clockTimer = new QTimer();
     clockTimer->setTimerType (Qt::PreciseTimer);
     connect(clockTimer , SIGNAL(timeout()) , clock , SLOT(addSec()) );
+    connect(clock , SIGNAL(reload()) , this , SLOT(reload()) );
 
     //開始模擬
     pacManMachine->spawnPacMans ();
     clockTimer->start(1000);
     stimulateScene->addItem (clock);
-
 }
 
 void StView::wheelEvent(QWheelEvent *event)
@@ -132,4 +132,11 @@ void StView::addPacMan(PacMan * pacMan)
     connect(timer , SIGNAL(timeout()) , pacMan , SLOT(destroySelf()) );
     timer->start (pacMan->liveSec *1000);
     connect(moveTimer , SIGNAL(timeout()) , pacMan , SLOT(move()) );
+}
+
+void StView::reload()
+{
+    pacManMachine->readCsv ();
+    pacManMachine->sortPacMans ();
+    pacManMachine->spawnPacMans ();
 }

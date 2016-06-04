@@ -5,6 +5,8 @@ Clock::Clock()
 {
     amount=1;
 
+    reloadCycle = 20;
+
     secNow = 0;
     setPlainText (QString::number(secNow));
 
@@ -16,4 +18,11 @@ void Clock::addSec()
 {
     secNow+=amount;
     setPlainText (QString::number(secNow));
+
+    if(secNow==reloadCycle)
+    {
+        secNow = 0;
+        setPlainText (QString::number(secNow));
+        emit reload();
+    }
 }

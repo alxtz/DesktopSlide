@@ -41,6 +41,8 @@ class StView : public QGraphicsView
 
     public slots:
         void addPacMan(PacMan * pacMan);
+
+        void reload();
 };
 
 #endif // STVIEW_H

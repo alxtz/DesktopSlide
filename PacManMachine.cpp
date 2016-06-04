@@ -4,7 +4,6 @@
 #include <QTimer>
 #include "PacManMachine.h"
 #include "PacMan.h"
-#include "PacWoman.h"
 
 using namespace std;
 
@@ -82,6 +81,7 @@ void PacManMachine::readXml()
 
 void PacManMachine::readCsv()
 {
+    pacManList = new vector<PacMan * >();
 
     char foo;
 
@@ -145,11 +145,12 @@ void PacManMachine::readCsv()
         if(type==1)
         {
             PacMan * pacMan = new PacMan(radius , QColor(R , G , B) , startX , startY , endX , endY , startSec , endSec);
-            pacManList.push_back (pacMan);
+            pacManList->push_back (pacMan);
         }
         else if(type==2)
         {
-
+            PacMan * pacMan = new PacMan(width , height , QColor(R , G , B) , startX , startY , endX , endY , startSec , endSec);
+            pacManList->push_back (pacMan);
         }
     }
 
@@ -157,12 +158,12 @@ void PacManMachine::readCsv()
 
 void PacManMachine::sortPacMans()
 {
-    for(int i=0; i<pacManList.size(); i++)
+    for(int i=0; i<pacManList->size(); i++)
     {
-        for(int j=1; j<pacManList.size()-i; j++)
+        for(int j=1; j<pacManList->size()-i; j++)
         {
-            cout<<"比對兩個startSec"<<pacManList.at( j )->startSec<<","<<pacManList.at( j-1)->startSec<<endl;
-            if( pacManList.at( j )->startSec < pacManList.at( j-1)->startSec )
+            cout<<"比對兩個startSec"<<pacManList->at( j )->startSec<<","<<pacManList->at( j-1)->startSec<<endl;
+            if( pacManList->at( j )->startSec < pacManList->at( j-1)->startSec )
             {
                 cout<<"調換"<<endl;
                 swapPacMan(  j , (j-1) );
@@ -174,15 +175,15 @@ void PacManMachine::sortPacMans()
 void PacManMachine::spawnPacMans()
 {
     pacManCount = 0;
-    for(int i=0; i<pacManList.size (); ++i)
+    for(int i=0; i<pacManList->size (); ++i)
     {
-        QTimer::singleShot(pacManList.at(i)->startSec*1000 , this , SLOT(emitSignal()) );
+        QTimer::singleShot(pacManList->at(i)->startSec*1000 , this , SLOT(emitSignal()) );
     }
 }
 
 void PacManMachine::emitSignal()
 {
-    emit setPacMan (pacManList.at(pacManCount));
+    emit setPacMan (pacManList->at(pacManCount));
     ++pacManCount;
 }
 
@@ -191,8 +192,8 @@ void PacManMachine::swapPacMan(int a, int b)
     //cout<<"swap"<<endl;
     //cout<<"原本兩個pacMan的出生時間為"<<pacManList.at( a )<<" , "<<pacManList.at( b )<<endl;
     PacMan * foo;
-    foo = pacManList.at(a);
-    pacManList.at(a) = pacManList.at(b);
-    pacManList.at(b) = foo;
+    foo = pacManList->at(a);
+    pacManList->at(a) = pacManList->at(b);
+    pacManList->at(b) = foo;
     //cout<<"後來兩個pacMan的出生時間為"<<pacManList.at( a )<<" , "<<pacManList.at( b )<<endl;
 }

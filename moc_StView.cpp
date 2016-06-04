@@ -19,8 +19,8 @@
 
 QT_BEGIN_MOC_NAMESPACE
 struct qt_meta_stringdata_StView_t {
-    QByteArrayData data[8];
-    char stringdata0[45];
+    QByteArrayData data[9];
+    char stringdata0[52];
 };
 #define QT_MOC_LITERAL(idx, ofs, len) \
     Q_STATIC_BYTE_ARRAY_DATA_HEADER_INITIALIZER_WITH_OFFSET(len, \
@@ -36,11 +36,12 @@ QT_MOC_LITERAL(3, 16, 1), // "x"
 QT_MOC_LITERAL(4, 18, 1), // "y"
 QT_MOC_LITERAL(5, 20, 9), // "addPacMan"
 QT_MOC_LITERAL(6, 30, 7), // "PacMan*"
-QT_MOC_LITERAL(7, 38, 6) // "pacMan"
+QT_MOC_LITERAL(7, 38, 6), // "pacMan"
+QT_MOC_LITERAL(8, 45, 6) // "reload"
 
     },
     "StView\0setSize\0\0x\0y\0addPacMan\0PacMan*\0"
-    "pacMan"
+    "pacMan\0reload"
 };
 #undef QT_MOC_LITERAL
 
@@ -50,7 +51,7 @@ static const uint qt_meta_data_StView[] = {
        7,       // revision
        0,       // classname
        0,    0, // classinfo
-       2,   14, // methods
+       3,   14, // methods
        0,    0, // properties
        0,    0, // enums/sets
        0,    0, // constructors
@@ -58,16 +59,18 @@ static const uint qt_meta_data_StView[] = {
        1,       // signalCount
 
  // signals: name, argc, parameters, tag, flags
-       1,    2,   24,    2, 0x06 /* Public */,
+       1,    2,   29,    2, 0x06 /* Public */,
 
  // slots: name, argc, parameters, tag, flags
-       5,    1,   29,    2, 0x0a /* Public */,
+       5,    1,   34,    2, 0x0a /* Public */,
+       8,    0,   37,    2, 0x0a /* Public */,
 
  // signals: parameters
     QMetaType::Void, QMetaType::Int, QMetaType::Int,    3,    4,
 
  // slots: parameters
     QMetaType::Void, 0x80000000 | 6,    7,
+    QMetaType::Void,
 
        0        // eod
 };
@@ -80,6 +83,7 @@ void StView::qt_static_metacall(QObject *_o, QMetaObject::Call _c, int _id, void
         switch (_id) {
         case 0: _t->setSize((*reinterpret_cast< int(*)>(_a[1])),(*reinterpret_cast< int(*)>(_a[2]))); break;
         case 1: _t->addPacMan((*reinterpret_cast< PacMan*(*)>(_a[1]))); break;
+        case 2: _t->reload(); break;
         default: ;
         }
     } else if (_c == QMetaObject::RegisterMethodArgumentMetaType) {
@@ -131,13 +135,13 @@ int StView::qt_metacall(QMetaObject::Call _c, int _id, void **_a)
     if (_id < 0)
         return _id;
     if (_c == QMetaObject::InvokeMetaMethod) {
-        if (_id < 2)
+        if (_id < 3)
             qt_static_metacall(this, _c, _id, _a);
-        _id -= 2;
+        _id -= 3;
     } else if (_c == QMetaObject::RegisterMethodArgumentMetaType) {
-        if (_id < 2)
+        if (_id < 3)
             qt_static_metacall(this, _c, _id, _a);
-        _id -= 2;
+        _id -= 3;
     }
     return _id;
 }

@@ -15,8 +15,13 @@ class Clock : public QGraphicsTextItem
 
         int amount;
 
+        int reloadCycle;
+
     public slots:
         void addSec();
+
+    signals:
+        void reload();
 };
 
 #endif // CLOCK_H

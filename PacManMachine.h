@@ -28,7 +28,7 @@ class PacManMachine : public QObject
         int reloadCycle;
         double clockPosX , clockPosY;
 
-        vector<PacMan * > pacManList;
+        vector<PacMan * > * pacManList;
 
         int pacManCount;
 
