@@ -4,6 +4,7 @@
 
 #include <QObject>
 #include <QGraphicsScene>
+#include <QGraphicsRectItem>
 
 class StimulateScene : public QGraphicsScene
 {
@@ -11,6 +12,8 @@ class StimulateScene : public QGraphicsScene
 
     public:
         StimulateScene();
+
+        QGraphicsRectItem * rect;
 
     public slots:
 };

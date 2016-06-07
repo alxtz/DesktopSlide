@@ -1,21 +1,21 @@
-<?xml version='1.0' encoding='UTF-8'?>
+﻿<?xml version='1.0' encoding='UTF-8'?>
 <instance user="motion simulation">
 
 
 	<!--資料來源-->
-	<database ip="140.116.1.1" id="user" pwd="userpwd" table="motion"/>
-	<!--ip="140.116.1.1" 資料庫所在的IP-->
-	<!--id="user" pwd="userpwd" 資料庫的帳密-->
-	<!--table="motion"  由資料庫中取數據的資料表-->
+	<database ip="140.116.75.132" id="pub_acdm" pwd="pub_acdm" table="[ACDM].[dbo].[ACDM_MOTION_SIMULATION]"/>
+	<!--ip="140.116.75.132" 資料庫所在的IP-->
+	<!--id="pub_acdm" pwd="pub_acdm" 資料庫的帳密-->
+	<!--table="motion(Pac-Man)"  由資料庫中取數據的資料表-->
 	
 	<!--背景圖檔名稱。如有路徑也一併放在這裡-->
 	<background>
-		<file name="abc.jpg">
+		<file name="Pac-Man.jpg">
 		</file>
 	</background>
 
 	<!--設定視窗的標題-->
-	<setting title="simulation"/>
+	<setting title="Pac-Man"/>
 
 	<!--設定重新載入的週期-->
 	<reload cycle="300" />

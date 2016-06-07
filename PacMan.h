@@ -14,12 +14,15 @@ class PacMan : public QObject , public QGraphicsPixmapItem
     //PacMan都是圓形的
 
     public:
-        PacMan(int radius , QColor color , double startX , double startY , double endX , double endY , int startSec , int endSec);
-        PacMan(int width , int height , QColor color , double startX , double startY , double endX , double endY , int startSec , int endSec);
+        PacMan(int radius , QColor color , int layer , double startX , double startY , double endX , double endY , int startSec , int endSec);
+        PacMan(int width , int height ,  QColor color , int layer , double startX , double startY , double endX , double endY , int startSec , int endSec);
 
         int radius;
         int width , height;
         QColor color;
+
+        int layer;
+
         double startX;
         double startY;
         double endX;

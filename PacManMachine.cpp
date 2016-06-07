@@ -84,6 +84,7 @@ void PacManMachine::readCsv()
     pacManList = new vector<PacMan * >();
 
     char foo;
+    string bar;
 
     int type;
     int radius;
@@ -92,6 +93,9 @@ void PacManMachine::readCsv()
     int R;
     int G;
     int B;
+
+    int layer;
+
     double startX , startY;
     double endX , endY;
     string startTime;
@@ -120,6 +124,10 @@ void PacManMachine::readCsv()
         B = (RGB[6]-48)*100 + (RGB[7]-48)*10 +(RGB[8]-48);
         if(RGB=="0")  R=0 , G=0 , B = 0;
         cout<<"R為"<<R<<",G為"<<G<<",B為"<<B<<endl;
+
+        csvFile>>layer>>foo;
+        cout<<"layer為"<<layer<<endl;
+
         csvFile>>startX>>foo;
         csvFile>>startY>>foo;
         cout<<"startX為"<<startX<<",startY為"<<startY<<endl;
@@ -142,14 +150,17 @@ void PacManMachine::readCsv()
                          + (endTime[7]-48);
         cout<<"startTime為"<<startSec<<",endTime為"<<endSec<<endl;
 
+        getline(csvFile , bar , '\n');
+        cout<<"註解為"<<bar<<endl;
+
         if(type==1)
         {
-            PacMan * pacMan = new PacMan(radius , QColor(R , G , B) , startX , startY , endX , endY , startSec , endSec);
+            PacMan * pacMan = new PacMan(radius , QColor(R , G , B) , layer , startX , startY , endX , endY , startSec , endSec);
             pacManList->push_back (pacMan);
         }
         else if(type==2)
         {
-            PacMan * pacMan = new PacMan(width , height , QColor(R , G , B) , startX , startY , endX , endY , startSec , endSec);
+            PacMan * pacMan = new PacMan(width , height , QColor(R , G , B) , layer , startX , startY , endX , endY , startSec , endSec);
             pacManList->push_back (pacMan);
         }
     }
