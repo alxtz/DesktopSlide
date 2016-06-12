@@ -19,8 +19,8 @@
 
 QT_BEGIN_MOC_NAMESPACE
 struct qt_meta_stringdata_StView_t {
-    QByteArrayData data[9];
-    char stringdata0[52];
+    QByteArrayData data[7];
+    char stringdata0[48];
 };
 #define QT_MOC_LITERAL(idx, ofs, len) \
     Q_STATIC_BYTE_ARRAY_DATA_HEADER_INITIALIZER_WITH_OFFSET(len, \
@@ -32,15 +32,13 @@ static const qt_meta_stringdata_StView_t qt_meta_stringdata_StView = {
 QT_MOC_LITERAL(0, 0, 6), // "StView"
 QT_MOC_LITERAL(1, 7, 7), // "setSize"
 QT_MOC_LITERAL(2, 15, 0), // ""
-QT_MOC_LITERAL(3, 16, 1), // "x"
-QT_MOC_LITERAL(4, 18, 1), // "y"
-QT_MOC_LITERAL(5, 20, 9), // "addPacMan"
-QT_MOC_LITERAL(6, 30, 7), // "PacMan*"
-QT_MOC_LITERAL(7, 38, 6), // "pacMan"
-QT_MOC_LITERAL(8, 45, 6) // "reload"
+QT_MOC_LITERAL(3, 16, 9), // "addPacMan"
+QT_MOC_LITERAL(4, 26, 7), // "PacMan*"
+QT_MOC_LITERAL(5, 34, 6), // "pacMan"
+QT_MOC_LITERAL(6, 41, 6) // "reload"
 
     },
-    "StView\0setSize\0\0x\0y\0addPacMan\0PacMan*\0"
+    "StView\0setSize\0\0addPacMan\0PacMan*\0"
     "pacMan\0reload"
 };
 #undef QT_MOC_LITERAL
@@ -62,14 +60,14 @@ static const uint qt_meta_data_StView[] = {
        1,    2,   29,    2, 0x06 /* Public */,
 
  // slots: name, argc, parameters, tag, flags
-       5,    1,   34,    2, 0x0a /* Public */,
-       8,    0,   37,    2, 0x0a /* Public */,
+       3,    1,   34,    2, 0x0a /* Public */,
+       6,    0,   37,    2, 0x0a /* Public */,
 
  // signals: parameters
-    QMetaType::Void, QMetaType::Int, QMetaType::Int,    3,    4,
+    QMetaType::Void, QMetaType::Int, QMetaType::Int,    2,    2,
 
  // slots: parameters
-    QMetaType::Void, 0x80000000 | 6,    7,
+    QMetaType::Void, 0x80000000 | 4,    5,
     QMetaType::Void,
 
        0        // eod

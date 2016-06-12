@@ -13,9 +13,8 @@ class StimulateScene : public QGraphicsScene
     public:
         StimulateScene();
 
-        QGraphicsRectItem * rect;
-
     public slots:
 };
+
 
 #endif // STIMULATESCENE_H

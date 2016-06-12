@@ -5,6 +5,7 @@
 #include <QDebug>
 #include <QTimeLine>
 #include <QColor>
+#include <QApplication>
 #include "StView.h"
 
 using namespace std;
@@ -65,150 +66,21 @@ StView::StView(QWidget * parent)
     connect(clock , SIGNAL(reload()) , this , SLOT(reload()) );
     //clock->reloadCycle = pacManMachine->reloadCycle;
 
+    //set values
+    QApplication::setOverrideCursor(Qt::OpenHandCursor);
+    saveCenterX = QImage(backgroundPath).width ()/2;
+    saveCenterY = QImage(backgroundPath).height ()/2;
+    lastdx = 0;
+    lastdy = 0;
+    scaleNow = 1;
+    isDrag = false;
+
     //開始模擬
     pacManMachine->spawnPacMans ();
     clockTimer->start(1000);
     stimulateScene->addItem (clock);
 
-    //something to indicate the center
-    centerPoint = new QGraphicsRectItem( -5 , -5 , 10 , 10);
-    centerPoint->setBrush (QBrush(QColor(Qt::yellow)));
-    scene()->addItem (centerPoint);
 
-    //set mouse tracking to false
-    isTracking = false;
-
-    //set center
-    //center_x = mapToScene(viewport()->rect()).boundingRect().center().x();
-    //center_y = mapToScene(viewport()->rect()).boundingRect().center().y();
-    //qDebug()<<"The center now is "<<center_x<<","<<center_y<<endl;
-}
-
-void StView::wheelEvent(QWheelEvent *event)
-{
-    if(event->delta()>0)
-    {
-        //cout<<"放大"<<endl;
-        currentScale+=event->delta();
-    }
-    else
-    {
-        //cout<<"縮小"<<endl;
-        currentScale+=event->delta();
-    }
-
-    if(currentScale<scaleMax)
-    {
-        //cout<<"拉回來"<<endl;
-        currentScale-=event->delta();
-        return;
-    }
-
-    double factor = event->delta()/100.0;
-    if(event->delta()>0)
-    {
-        factor = factor;
-    }
-    else
-    {
-        factor = -1/factor;
-    }
-
-    scale(factor , factor);
-
-    //cout<<"currentScale為"<<currentScale<<endl;
-}
-
-void StView::keyPressEvent(QKeyEvent *event)
-{
-    if(event->key () == Qt::Key_A)
-    {
-        centerOn (
-                    mapToScene(viewport()->rect()).boundingRect().center().x () -10
-                  , mapToScene(viewport()->rect()).boundingRect().center().y ()
-                    );
-        qDebug()<<"The Center Is Now At"
-               <<mapToScene(viewport()->rect()).boundingRect().center().x ()
-              <<" , "<<mapToScene(viewport()->rect()).boundingRect().center().y ()<<"\n";
-    }
-    else if (event->key () == Qt::Key_D)
-    {
-        centerOn (
-                    mapToScene(viewport()->rect()).boundingRect().center().x () +10
-                  , mapToScene(viewport()->rect()).boundingRect().center().y ()
-                    );
-        qDebug()<<"The Center Is Now At"
-               <<mapToScene(viewport()->rect()).boundingRect().center().x ()
-              <<" , "<<mapToScene(viewport()->rect()).boundingRect().center().y ()<<"\n";
-    }
-}
-
-
-//PRESS MOUSE
-void StView::mousePressEvent(QMouseEvent *event)
-{
-    if(event->button() == Qt::LeftButton)
-    {
-        saveWindowX = event->pos ().x ();
-        saveWindowY = event->pos ().y ();
-
-        QPoint windowPressPoint( saveWindowX ,  saveWindowY );
-        saveDragCenterX = mapToScene (windowPressPoint).x();
-        saveDragCenterY = mapToScene (windowPressPoint).y();
-
-        qDebug()<<"You Clicked Window At"<< event->pos ().x ()<<" , "<<event->pos ().y ();
-        qDebug()<<"You Clicked Scene At"<< saveDragCenterX<<" , "<<saveDragCenterY;
-
-        isTracking = true;
-
-        //test
-        qDebug()<<"Set The Center At"<< saveDragCenterX<<" , "<<saveDragCenterY;
-        centerOn (saveDragCenterX , saveDragCenterY);
-        qDebug()<<"The Center Is Now At"
-              <<mapToScene(viewport()->rect()).boundingRect().center().x ()
-              <<" , "<<mapToScene(viewport()->rect()).boundingRect().center().y ()<<"\n";
-        //centerPoint->setPos(mapToScene(viewport()->rect()).boundingRect().center().x () , mapToScene(viewport()->rect()).boundingRect().center().y ());
-    }
-}
-
-void StView::mouseReleaseEvent(QMouseEvent *event)
-{
-    isTracking = false;
-}
-
-void StView::mouseMoveEvent(QMouseEvent *event)
-{
-    if(isTracking == true)
-    {
-        int dragX = event->pos ().x () - saveWindowX;
-        int dragY = event->pos ().y () - saveWindowY;
-        qDebug()<<"You Dragged The Window For"<<dragX<<" , "<<dragY;
-
-        QRect fuck = viewport()->rect();
-        fuck.setX(fuck.x ()+ dragX);
-        fuck.setY(fuck.y ()+ dragY);
-        //fuck.setRect (mapToScene (fuck));
-
-
-        centerOn (mapToScene(fuck).boundingRect().center().x () ,mapToScene(fuck).boundingRect().center().y () );
-
-
-        saveWindowX = event->pos ().x ();
-        saveWindowY = event->pos ().y ();
-
-        //QPoint windowPressPoint( saveWindowX ,  saveWindowY );
-        //saveDragCenterX = mapToScene (windowPressPoint).x();
-        //saveDragCenterY = mapToScene (windowPressPoint).y();
-
-
-
-        centerOn (saveDragCenterX , saveDragCenterY);
-        saveWindowX = event->pos ().x ();
-        saveWindowY = event->pos ().y ();
-        QPoint windowPressPoint( saveWindowX ,  saveWindowY );
-        saveDragCenterX = mapToScene (windowPressPoint).x();
-        saveDragCenterY = mapToScene (windowPressPoint).y();
-    }
 }
 
 void StView::addPacMan(PacMan * pacMan)
@@ -247,4 +119,86 @@ void StView::reload()
     pacManMachine->readCsv ();
     pacManMachine->sortPacMans ();
     pacManMachine->spawnPacMans ();
+}
+
+void StView::wheelEvent(QWheelEvent *event)
+{
+    double factor = event->delta()/115.0;
+
+    if(event->delta()>0)
+    {
+        factor = factor;
+    }
+    else
+    {
+        factor = -1/factor;
+    }
+
+    cout<<"factor is "<<factor<<endl;
+
+
+    QRectF r (0 , 0 , 1200 , 600);
+
+    double testWidth = transform ().scale (factor , factor).mapRect (r).width ();
+
+    cout<<"the test width is "<<testWidth<<endl;
+
+    if(testWidth<1200)
+    {
+        qDebug()<<"too short";
+        return;
+    }
+    else if(testWidth > 1200 && testWidth < 1252)
+    {
+        qDebug()<<"weird amount";
+        while(testWidth > 1210)
+        {
+            qDebug()<<"format"<<testWidth*0.99;
+            testWidth *=0.99;
+            scale(0.99 , 0.99);
+            scaleNow*=0.99;
+        }
+        scale(0.97 , 0.97);
+        scaleNow*=0.97;
+        return;
+    }
+
+    scaleNow*=factor;
+    scale(factor , factor);
+}
+
+void StView::mousePressEvent(QMouseEvent *event)
+{
+    QApplication::setOverrideCursor(Qt::ClosedHandCursor);
+    isDrag = true;
+    double clickWindowX = event->pos ().x ();
+    double clickWindowY = event->pos ().y ();
+
+    saveWindowX = clickWindowX + lastdx;
+    saveWindowY = clickWindowY + lastdy;
+}
+
+void StView::mouseReleaseEvent(QMouseEvent *event)
+{
+    QApplication::setOverrideCursor(Qt::OpenHandCursor);
+    isDrag = false;
+    lastdx = saveWindowX - event->pos ().x ();
+    lastdy = saveWindowY - event->pos ().y ();
+}
+
+void StView::mouseMoveEvent(QMouseEvent *event)
+{
+    if(isDrag == true)
+    {
+        QApplication::setOverrideCursor(Qt::ClosedHandCursor);
+        double clickWindowX = event->pos ().x ();
+        double clickWindowY = event->pos ().y ();
+
+        double dx = clickWindowX - saveWindowX;
+        double dy = clickWindowY - saveWindowY;
+
+        cout<<dx<<","<<dy<<endl;
+
+        centerOn (saveCenterX-dx/scaleNow , saveCenterY-dy/scaleNow);
+    }
 }

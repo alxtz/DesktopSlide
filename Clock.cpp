@@ -5,7 +5,7 @@ Clock::Clock()
 {
     amount=1;
 
-    reloadCycle = 2000;
+    reloadCycle = 15;
 
     secNow = 0;
     setPlainText (QString::number(secNow));

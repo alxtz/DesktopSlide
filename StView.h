@@ -33,31 +33,33 @@ class StView : public QGraphicsView
         QTimer * moveTimer;
         QTimer * clockTimer;
 
-        QGraphicsRectItem * centerPoint;
-
-
-        int currentScale = 10000;
-        const int scaleMax = 10000;
-
-        int _numScheduledScalings;
-        void wheelEvent (QWheelEvent * event);//scroll to resize the view
-
-        void keyPressEvent (QKeyEvent * event);//for testing
-
-        void mousePressEvent      (QMouseEvent * event);//track
-        void mouseReleaseEvent (QMouseEvent * event);//track
-        void mouseMoveEvent     (QMouseEvent * event);//track
-        bool isTracking;//track
-        double saveWindowX , saveWindowY;
-        double saveDragCenterX , saveDragCenterY;
-
     signals:
-        void setSize(int x , int y);
+        void setSize(int , int);
 
     public slots:
         void addPacMan(PacMan * pacMan);
 
         void reload();
+
+    //the part to handle scroll and drag
+    public:
+        void wheelEvent (QWheelEvent * event);
+        void mousePressEvent      (QMouseEvent * event);
+        void mouseReleaseEvent (QMouseEvent * event);
+        void mouseMoveEvent     (QMouseEvent * event);
+
+        double saveWindowX;
+        double saveWindowY;
+
+        double saveCenterX;
+        double saveCenterY;
+
+        double lastdx;
+        double lastdy;
+
+        double scaleNow;
+
+        bool isDrag;
 };
 
 #endif // STVIEW_H
